@@ -11,6 +11,7 @@ namespace Services.CouponAPI.Migrations
     public partial class CouponTables : Migration
     {
         /// <inheritdoc />
+        /// I think maybe coder can add new data or update data in here. Let check it later.
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             // There is a bug here. When data table is exists maybe it will throw an exception when run app.
