@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Services.CouponAPI.Data;
 
@@ -11,9 +12,11 @@ using Services.CouponAPI.Data;
 namespace Services.CouponAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240501160100_CouponTables")]
+    partial class CouponTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +50,6 @@ namespace Services.CouponAPI.Migrations
 
                     b.ToTable("Coupons");
 
-                    // this is generated automatically after run "add-migration CouponTables" in Package Manager Console
                     b.HasData(
                         new
                         {

@@ -14,3 +14,6 @@
 
 Detail in image as below:
 ![Nugget packages](./img/MarkDown/Nugget_package.PNG "Title")
+
+## Package Manager Console
+Theo như mình đang hiểu ở đây, thì nó đang là một cái command prompt cho phép người dùng thực hiện lệnh để tạo ra các migration để đưa data dô database. Các file này sẽ được store trong folder Migrations hình như được gen automatically luôn.

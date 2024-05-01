@@ -29,5 +29,21 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
+ApplyMigration();
 app.Run();
+
+
+void ApplyMigration()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        // Define
+        var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        // Check if Migration is store in Migration folder has Data
+        if (_db.Database.GetPendingMigrations().Count() > 0)
+        {
+            _db.Database.Migrate();
+        }
+    }
+}
