@@ -1,1 +1,1 @@
-"# LearningDotNetCore" 
+"# LearningDotNetCore"
