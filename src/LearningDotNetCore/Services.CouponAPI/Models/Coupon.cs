@@ -1,4 +1,6 @@
-﻿namespace Services.CouponAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Services.CouponAPI.Models
 {
     public class Coupon
     {
@@ -8,16 +10,19 @@
         /// CouponID
         /// </summary>
         /// Nghien cuu xem co cach nao change coupon id thanh string de add uuid duoc khong? Hoac don gian la de add uuid
+        [Key]
         public int CouponId { get; set; }
 
         /// <summary>
         /// Coupon code
         /// </summary>
+        [Required]
         public string CouponCode { get; set; }
 
         /// <summary>
         /// Discount Amount
         /// </summary>
+        [Required]
         public double DiscountAmount { get; set; }
 
         /// <summary>
