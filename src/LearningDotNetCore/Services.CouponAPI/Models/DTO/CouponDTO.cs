@@ -13,7 +13,7 @@
         /// <summary>
         /// Coupon code
         /// </summary>
-        public string CouponCode { get; set; }
+        public string CouponCode { get; set; } = string.Empty; // Fix warning momentarily
 
         /// <summary>
         /// Discount Amount

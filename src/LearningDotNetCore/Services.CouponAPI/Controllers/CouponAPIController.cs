@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Services.CouponAPI.Data;
 using Services.CouponAPI.Models;
+using Services.CouponAPI.Models.DTO;
 
 namespace Services.CouponAPI.Controllers
 {
@@ -13,6 +14,8 @@ namespace Services.CouponAPI.Controllers
 
         private readonly AppDbContext _db;
 
+        private ResponseDTO _responseDTO;
+
         #endregion
 
         #region [Constructors]
@@ -20,31 +23,40 @@ namespace Services.CouponAPI.Controllers
         public CouponAPIController(AppDbContext db)
         {
             _db = db;
+            _responseDTO = new ResponseDTO();
         }
 
         [HttpGet]
-        public object Get()
+        public ResponseDTO Get()
         {
             try
             {
                 IEnumerable<Coupon> objList = _db.Coupons.ToList();
-                return objList;
+                _responseDTO.Result = objList;
             }
-            catch (Exception ex) { }
-            return null;
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
         }
 
         [HttpGet]
-        //[Route("{id:int}")]
-        public object Get(int id)
+        [Route("{id:int}")]
+        public ResponseDTO Get(int id)
         {
             try
             {
                 Coupon objList = _db.Coupons.First(i => i.CouponId == id);
-                return objList;
+                _responseDTO.Result = objList;
             }
-            catch (Exception ex) { }
-            return null ;
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
         }
 
         #endregion
