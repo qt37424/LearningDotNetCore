@@ -1,4 +1,9 @@
-﻿namespace Services.CouponAPI.Models.DTO
+﻿/// ======================================================================
+/// File Description
+///     This will define the respone when send request
+/// ======================================================================
+
+namespace Services.CouponAPI.Models.DTO
 {
     public class ResponseDTO
     {

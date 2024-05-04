@@ -38,6 +38,12 @@ namespace Services.CouponAPI.Controllers
             _mapper = mapper;
         }
 
+        #endregion
+
+        #region Methods API
+
+        #region [GET Methods]
+
         [HttpGet]
         public ResponseDTO Get()
         {
@@ -82,6 +88,100 @@ namespace Services.CouponAPI.Controllers
             }
             return _responseDTO;
         }
+
+        [HttpGet]
+        [Route("GetByCode/{code}")]
+        public ResponseDTO Get(string code)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.First(i => i.CouponCode.ToLower() == code.ToLower());
+                _responseDTO.Result = _mapper.Map<CouponDTO>(obj);
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
+        }
+
+        #endregion
+
+        #region [POST Methods]
+
+        [HttpPost]
+        public ResponseDTO Post([FromBody] CouponDTO couponDto)
+        {
+            try
+            {
+                Coupon obj = _mapper.Map<Coupon>(couponDto);
+                Guid myuuid = Guid.NewGuid();
+                obj.CouponCode = myuuid.ToString();
+                obj.LastUpdated = DateTime.UtcNow;
+                _db.Coupons.Add(obj);
+                _db.SaveChanges();
+                _responseDTO.Result = _mapper.Map<CouponDTO>(obj);
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
+        }
+
+        #endregion
+
+        #region [PUT Methods]
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public ResponseDTO Put([FromBody] CouponDTO couponDto, int id)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.First(i => i.CouponId == id);
+                obj.DiscountAmount = couponDto.DiscountAmount;
+                obj.MinAmount = couponDto.MinAmount;
+                obj.LastUpdated = DateTime.UtcNow;
+                _db.Coupons.Update(obj);
+                _db.SaveChanges();
+                _responseDTO.Result = _mapper.Map<CouponDTO>(obj);
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
+        }
+
+        #endregion
+
+        #region [Delete Methods]
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public ResponseDTO Delete(int id)
+        {
+            try
+            {
+                Coupon obj = _db.Coupons.First(i => i.CouponId == id);
+                _db.Coupons.Remove(obj);
+                _db.SaveChanges();
+                _responseDTO.IsSuccess = true;
+                _responseDTO.Message = "Successfully!";
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.IsSuccess = false;
+                _responseDTO.Message = ex.Message;
+            }
+            return _responseDTO;
+        }
+
+        #endregion
 
         #endregion
     }

@@ -1,4 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿/// ======================================================================
+/// File Description
+///     This file is defined ORM will be contact with DB
+/// ======================================================================
+
+using System.ComponentModel.DataAnnotations;
 
 namespace Services.CouponAPI.Models
 {
@@ -17,7 +22,7 @@ namespace Services.CouponAPI.Models
         /// Coupon code
         /// </summary>
         [Required]
-        public string CouponCode { get; set; }
+        public string CouponCode { get; set; } = String.Empty; // Fix warning momentarily
 
         /// <summary>
         /// Discount Amount
