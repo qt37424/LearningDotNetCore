@@ -6,7 +6,7 @@
 
 ## Nugget using
 1. AutoMapper
-2. AutoMapper.DependencyInjection
+2. AutoMapper.DependencyInjection (nếu ver của AutoMapper là 13 thì không  cần cái này: Reference link: https://stackoverflow.com/questions/78025475/asp-net-core-automapper-how-to-resolve-errorcs0121-the-call-is-ambiguous-betwe)
 3. Microsoft.EntityFrameworkCore
 4. Microsoft.EntityFrameworkCore.SqlServer
 5. Microsoft.EntityFrameworkCore.Tools

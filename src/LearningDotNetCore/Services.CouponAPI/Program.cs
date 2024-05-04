@@ -1,4 +1,6 @@
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Services.CouponAPI;
 using Services.CouponAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")); // Instead of hard code in here, maybe we should config it intoa config file. (appsetting.json)
+    option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConection")); // Instead of hard code in here, maybe we should config it into a config file. (appsetting.json)
 });
+// AutoMapper
+IMapper mapper = MappingConfig.RegisterMap().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+// AutoMapper
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
