@@ -3,14 +3,14 @@
 ///     This will define the respone ORM when send request CRUD
 /// ======================================================================
 
-namespace Services.CouponAPI.Models.DTO
+namespace Web.Models
 {
     public class ResponseDTO
     {
         #region [Properties]
 
         /// <summary>
-        /// Object Result
+        /// Object Result or ORM result
         /// </summary>
         public object? Result { get; set; }
 
